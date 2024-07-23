@@ -1,0 +1,22 @@
+# Logs
+logs
+*.log*
+
+#bouts de tuto
+frontend/
+
+# Dependency directories
+node_modules/
+
+# dotenv environment variables file
+.env
+.env.test
+
+#Locks
+package-lock.json
+
+# VSCode workspaces
+*.code-workspace
+
+# Random Files
+*.rar
