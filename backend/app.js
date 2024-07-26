@@ -1,6 +1,6 @@
 const express = require('express');
 const app = express();
-
+const userRoutes = require('./routes/user')
 const stuffRoutes = require('./routes/stuff')
 app.use(express.json());
 
@@ -21,6 +21,7 @@ mongoose.connect(process.env.MONGO/*,
 .catch(() => console.log('Connexion à MongoDB échouée !'));
 
 app.use('/api/stuff', stuffRoutes);
+app.use('/api/auth', userRoutes)
 
 
 

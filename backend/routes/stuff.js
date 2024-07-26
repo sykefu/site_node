@@ -1,16 +1,18 @@
 const express = require('express');
 const router = express.Router();
+
 const stuffController = require('../controllers/stuff')
+const auth = require('../controllers/auth')
 /* Total route should be /api/stuff/   */
 
-router.post('/', stuffController.createThing);
+router.post('/', auth, stuffController.createThing);
 
-router.put('/:id', stuffController.modifyThing);
+router.put('/:id', auth, stuffController.modifyThing);
 
-router.delete('/:id', stuffController.deleteThing);
+router.delete('/:id', auth, stuffController.deleteThing);
 
-router.get('/', stuffController.getAllThings);
+router.get('/', auth, stuffController.getAllThings);
 
-router.get('/:id', stuffController.getOneThing)
+router.get('/:id', auth, stuffController.getOneThing)
 
 module.exports = router;
