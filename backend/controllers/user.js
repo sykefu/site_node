@@ -3,6 +3,7 @@ const bcrypt = require('bcrypt')
 const jwt = require('jsonwebtoken');
 
 exports.signup = (req,res,next) => {
+    console.log(req.body.password)
     if (req.body.username.length < 6){ //lol, only short usernames
     bcrypt.hash(req.body.password, 9)
     .then(hash => {
@@ -27,6 +28,7 @@ exports.signup = (req,res,next) => {
 exports.login = (req,res,next) => {
     User.findOne({username: req.body.username})
     .then(user =>{
+        console.log(req.body.password, user.password)
         if(user === null){
             res.status(401).json({message: "erreur, utilisateur inconnu"})
         }
@@ -51,6 +53,6 @@ exports.login = (req,res,next) => {
             .catch(error => res.status(500).json({error}))
     }
     })
-    .catch(error => res.status(500).json({error}))
+    .catch(error => res.status(500).json({error: "notfound"}))
 
 };

@@ -1,13 +1,14 @@
 const express = require('express');
 const router = express.Router();
 
-const stuffController = require('../controllers/stuff')
-const auth = require('../controllers/auth')
+const stuffController = require('../controllers/stuff');
+const auth = require('../controllers/auth');
+const multer = require('../controllers/multer-config');
 /* Total route should be /api/stuff/   */
 
-router.post('/', auth, stuffController.createThing);
+router.post('/', auth, multer, stuffController.createThing);
 
-router.put('/:id', auth, stuffController.modifyThing);
+router.put('/:id', auth, multer, stuffController.modifyThing);
 
 router.delete('/:id', auth, stuffController.deleteThing);
 

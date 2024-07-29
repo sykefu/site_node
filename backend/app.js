@@ -3,7 +3,8 @@ const app = express();
 const userRoutes = require('./routes/user')
 const stuffRoutes = require('./routes/stuff')
 app.use(express.json());
-
+const path = require('path');
+app.use('/images', express.static(path.join(__dirname, 'images')));
 
 app.use((req, res, next) => {
     res.setHeader('Access-Control-Allow-Origin', '*');
