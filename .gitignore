@@ -2,9 +2,6 @@
 logs
 *.log*
 
-#bouts de tuto
-frontend/
-
 # Dependency directories
 node_modules/
 
