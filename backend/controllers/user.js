@@ -26,6 +26,7 @@ exports.signup = (req,res,next) => {
 
 
 exports.login = (req,res,next) => {
+
     User.findOne({username: req.body.username})
     .then(user =>{
         if(user === null){
@@ -38,13 +39,17 @@ exports.login = (req,res,next) => {
                     res.status(401).json({message: "erreur, mdp erroné"})
                 }
                 else{
-                    res.status(200).json({
+                    let timeout = new Date();
+                    let now = timeout.getTime() + 10000; //1000*3600*24
+                    timeout.setTime(now)
+                    let tk = jwt.sign(
+                        { userId: user._id },
+                        process.env.TOKENKEY,
+                        { expiresIn: '24h' })
+                    res.cookie("userId",user._id, {secure: false, samesite: false, httpOnly: true}).
+                        cookie("token",tk, {secure: false, samesite: false, httpOnly: true}).status(200).json({
                         userId: user._id,
-                        token: jwt.sign(
-                            { userId: user._id },
-                            process.env.TOKENKEY,
-                            { expiresIn: '24h' }
-                        )
+                        token: tk
                     })
                 }
             }

@@ -11,18 +11,21 @@
 
     async function login(){
         
-        
         const response = await fetch('http://localhost:3000/api/auth/login', {
             method: 'post',
             headers: { 'Content-Type' : 'application/json'},
+            credentials: 'include',
             body: JSON.stringify({
-                "username" : "123",
-                "password" : "123"
+                // @ts-ignore
+                "username" : document.getElementById("username")?.value,
+                // @ts-ignore
+                "password" : document.getElementById("password")?.value
             })
         }).then((resp) => { 
             return resp.json();
         }).then((data)=>{
             resu = JSON.parse(JSON.stringify(data))
+            //document.cookie = JSON.stringify(data)
             //Todo: put in cookie, then check if sent back with another api.
         });
 
