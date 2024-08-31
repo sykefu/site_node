@@ -2,10 +2,12 @@ const express = require('express');
 const app = express();
 const userRoutes = require('./routes/user')
 const stuffRoutes = require('./routes/stuff')
+const sujetbacpratiqueRoutes = require('./routes/sujet-bac-pratique')
 const cookieParser = require('cookie-parser')
 app.use(express.json());
 const path = require('path');
 app.use('/images', express.static(path.join(__dirname, 'images')));
+app.use('/data/terminale/type_bac_pratique', express.static(path.join(__dirname, 'data')));
 app.use('/data', express.static(path.join(__dirname, 'data')));
 
 app.use((req, res, next) => {
@@ -25,7 +27,8 @@ mongoose.connect(process.env.MONGO/*,
 .catch(() => console.log('Connexion à MongoDB échouée !'));
 
 app.use('/api/stuff', stuffRoutes);
-app.use('/api/auth', userRoutes)
+app.use('/api/auth', userRoutes);
+app.use('/api/sujet-bac-pratique', sujetbacpratiqueRoutes);
 
 
 
